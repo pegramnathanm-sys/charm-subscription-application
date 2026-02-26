@@ -253,6 +253,8 @@ cp .env.example .env   # then add your RYE_API_KEY
 npm run dev             # starts on http://localhost:3000 with auto-restart
 ```
 
+> **Note:** A Rye API key is required to test the product lookup feature. Without one, the app still runs and all other features work (subscriptions, settings, dark mode, navigation), but pasting a product URL will fail. Contact a project maintainer for a key if you need to test product lookup.
+
 ### Before Submitting a PR
 
 - Verify the app loads without console errors or 404s
