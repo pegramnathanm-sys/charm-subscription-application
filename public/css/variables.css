@@ -1,0 +1,96 @@
+/* ── CSS Variables ── */
+:root {
+  --bg: #ffffff;
+  --text: #000000;
+  --text-secondary: #6b6b6b;
+  --card-bg: #f5f5f5;
+  --border: #e5e5e5;
+  --btn-primary: #000000;
+  --btn-text: #ffffff;
+  --sidebar-width: 280px;
+  --radius-sm: 9px;
+  --radius-md: 14px;
+  --transition: 0.18s ease;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+
+  /* Component colors */
+  --toggle-track: #ddd;
+  --toggle-thumb: #fff;
+  --badge-paused-bg: #f0f0f0;
+  --badge-paused-text: #666;
+  --border-hover: #ccc;
+  --border-focus: #999;
+  --btn-hover: #333;
+  --btn-disabled: #ccc;
+  --placeholder-color: #aaa;
+  --placeholder-bg: #e8e8e8;
+  --danger-bg: #fff0f0;
+  --danger-text: #c00;
+  --danger-border: #fcc;
+  --input-bar-bg: rgba(255, 255, 255, 0.45);
+  --input-bar-border: rgba(0, 0, 0, 0.1);
+  --input-bar-inset: rgba(255, 255, 255, 0.8);
+  --dot-color: rgba(0, 0, 0, 0.13);
+  --shimmer-overlay: rgba(255, 255, 255, 0.42);
+  --shimmer-t1: #000;
+  --shimmer-t2: #5a5a5a;
+  --shimmer-t3: #969696;
+  --shimmer-s1: #6b6b6b;
+  --shimmer-s2: #909090;
+  --shimmer-s3: #b0b0b0;
+}
+
+/* ── Dark Theme ── */
+[data-theme="dark"] {
+  --bg: #1a1a1a;
+  --text: #e8e8e8;
+  --text-secondary: #999;
+  --card-bg: #252525;
+  --border: #333;
+  --btn-primary: #e8e8e8;
+  --btn-text: #1a1a1a;
+  --toggle-track: #444;
+  --toggle-thumb: #e8e8e8;
+  --badge-paused-bg: #2a2a2a;
+  --badge-paused-text: #888;
+  --border-hover: #555;
+  --border-focus: #777;
+  --btn-hover: #d0d0d0;
+  --btn-disabled: #444;
+  --placeholder-color: #666;
+  --placeholder-bg: #2a2a2a;
+  --danger-bg: #3a1a1a;
+  --danger-text: #ff6666;
+  --danger-border: #552222;
+  --input-bar-bg: rgba(30, 30, 30, 0.7);
+  --input-bar-border: rgba(255, 255, 255, 0.08);
+  --input-bar-inset: rgba(255, 255, 255, 0.03);
+  --dot-color: rgba(255, 255, 255, 0.06);
+  --shimmer-overlay: transparent;
+  --shimmer-t1: #e8e8e8;
+  --shimmer-t2: #aaa;
+  --shimmer-t3: #777;
+  --shimmer-s1: #999;
+  --shimmer-s2: #777;
+  --shimmer-s3: #555;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  font-family: var(--font);
+  background-color: var(--bg);
+  background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+  background-size: 22px 22px;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
