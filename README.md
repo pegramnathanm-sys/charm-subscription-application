@@ -181,3 +181,82 @@ The app will be available at `http://localhost:3000`.
 - Failed payment retry logic
 - Refund and dispute handling
 - Multi-merchant analytics
+
+---
+
+## LLM Quickstart
+
+> Instructions for AI coding agents (Claude Code, Cursor, Copilot, etc.) working on this project.
+
+### Git Workflow
+
+**Every feature, bug fix, or change gets its own branch.** Do not commit directly to `main`.
+
+```bash
+# Create a feature branch off main
+git checkout main
+git pull origin main
+git checkout -b feature/short-description
+
+# When done, push and open a PR
+git push -u origin feature/short-description
+gh pr create --base main
+```
+
+- **Branch naming:** `feature/`, `fix/`, or `refactor/` prefix + short kebab-case description (e.g. `feature/stripe-checkout`, `fix/dark-mode-shimmer`)
+- **One concern per branch.** Don't bundle unrelated changes.
+- **Never force-push to `main`.** Never commit directly to `main`.
+- **Open a PR** for all changes so they can be reviewed before merging.
+
+### Tech Stack
+
+- **Backend:** Node.js + Express, no TypeScript
+- **Frontend:** Vanilla JS (ES modules), no frameworks, no bundler
+- **Styling:** Plain CSS with CSS custom properties for theming — no Sass/Tailwind
+- **APIs:** Rye (product/checkout), Stripe (payments)
+- **Package manager:** npm
+
+### Project Conventions
+
+- **No `.env` in commits.** API keys and secrets go in `.env` (gitignored). Use `.env.example` as the template.
+- **CSS theming:** All colors must use CSS variables defined in `public/css/variables.css`. Both `:root` (light) and `[data-theme="dark"]` blocks must be updated when adding new colors. Never hardcode color values in component CSS files.
+- **CSS file organization:** Styles are split by concern — don't put layout styles in `components.css` or component styles in `buy.css`. Match the existing pattern:
+  - `variables.css` — design tokens, reset, base styles
+  - `layout.css` — app shell, sidebar, nav, responsive breakpoints
+  - `components.css` — shared UI (buttons, toggles, badges, qty selector, toast)
+  - `buy.css` — buy view, chat, product cards, input bar
+  - `subscriptions.css` — subscription list and cards
+  - `settings.css` — settings form and inputs
+- **JS module organization:** Each module has a clear responsibility. Entry point is `app.js` which calls `init*()` from each module. Don't create circular imports.
+  - `app.js` — entry point, imports and initializes everything
+  - `navigation.js` — sidebar, view switching, hamburger menu
+  - `chat.js` — chat bubble DOM helpers
+  - `products.js` — product lookup API calls, product card rendering
+  - `subscriptions.js` — subscription state array, CRUD, card rendering
+  - `settings.js` — dark mode toggle, settings persistence
+  - `utils.js` — pure utility functions (escHtml, showToast, formatPrice, etc.)
+- **Event handling:** Use event delegation on parent containers for dynamically created elements. Use `data-action` and `data-id` attributes instead of inline `onclick` handlers.
+- **SVG icons:** Use `currentColor` for stroke/fill so icons inherit theme colors. Never hardcode color values in SVGs.
+- **HTML:** The app is a single-page app with view switching (not routing). Views are `div.view` elements toggled by `display: none`.
+
+### Server
+
+- `server.js` is the only backend file. It serves static files from `public/` and proxies API calls to Rye.
+- The API key is read from `process.env.RYE_API_KEY` — never expose it to the client.
+- To add a new API route, follow the existing pattern in `server.js` (proxy to external service, return JSON).
+
+### Running Locally
+
+```bash
+npm install
+cp .env.example .env   # then add your RYE_API_KEY
+npm run dev             # starts on http://localhost:3000 with auto-restart
+```
+
+### Before Submitting a PR
+
+- Verify the app loads without console errors or 404s
+- Test both light and dark mode if you touched any CSS
+- Test mobile view (hamburger menu, sidebar) if you touched layout
+- Make sure no API keys or secrets are in any `public/` file
+- Keep commits focused with clear messages
